@@ -49,7 +49,7 @@
                             id="password" 
                             name="password" 
                             required
-                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 text-gray-700"
                         >
                         <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 px-3 py-2 text-gray-600 ">
                             <i class="fas fa-eye"></i>
