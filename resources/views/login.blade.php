@@ -28,7 +28,7 @@
         <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 text-center mb-6">Login</h2>
             
-            <form action="{{ route('home') }}" method="POST" class="space-y-4">
+            <form class="space-y-4" id="login-form" action="{{ route('api/login') }}" method="POST">
                 @csrf
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-mail</label>
