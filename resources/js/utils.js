@@ -59,3 +59,10 @@ export async function api(url, method, data) {
         throw new Error('An error occurred. Please try again later.');
     }
 }
+
+export async function checkLogin() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location = '/login';
+    }
+}

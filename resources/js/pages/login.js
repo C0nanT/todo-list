@@ -23,6 +23,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
         if (result.token) {
             localStorage.setItem('token', result.token);
             toastSuccess('Login successful');
+            window.location = '/home';
         } else {
             console.log(result);
             toastError(result.message);
