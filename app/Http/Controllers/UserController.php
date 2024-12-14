@@ -8,51 +8,70 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
+
 
 class UserController extends Controller
 {
     public function register(Request $request): JsonResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:3|confirmed',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:3',
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        return response()->json(['message' => 'User registered successfully'], 201);
+            return response()->json(['message' => 'User registered successfully'], 201);
+        } catch (ValidationException $e) {
+            Log::error('Erro de validação', $e->errors());
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            Log::error('Erro ao registrar usuário', ['exception' => $e]);
+            return response()->json(['message' => 'Erro ao registrar usuário'], 500);
+        }
     }
 
     public function login(Request $request): JsonResponse
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (!Auth::attempt($credentials)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+        try {
+            $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string',
             ]);
+
+            if (!Auth::attempt($request->only('email', 'password'))) {
+                return response()->json(['message' => 'Unauthorized'], 401);
+            }
+
+            $user = User::where('email', $request->email)->firstOrFail();
+            $token = $user->createToken($user->email)->plainTextToken;
+
+            return response()->json(['token' => $token], 200);
+        } catch (ValidationException $e) {
+            Log::error('Erro de validação', $e->errors());
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            Log::error('Erro ao logar usuário', ['exception' => $e]);
+            return response()->json(['message' => 'Erro ao logar usuário'], 500);
         }
-
-        $user = $request->user();
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json(['access_token' => $token, 'token_type' => 'Bearer']);
     }
 
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json(['message' => 'Logged out successfully']);
+        try {
+            $request->user()->tokens()->delete();
+            return response()->json(['message' => 'Logged out'], 200);
+        } catch (\Exception $e) {
+            Log::error('Erro ao deslogar usuário', ['exception' => $e]);
+            return response()->json(['message' => 'Erro ao deslogar usuário'], 500);
+        }
     }
-}
+
+} 
