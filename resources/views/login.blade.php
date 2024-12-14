@@ -20,10 +20,7 @@
     </head>
 
     <body class="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white flex items-center justify-center antialiased">
-        <div class="absolute top-4 right-4">
-            <button id="dark-mode-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+        @include('components.theme-toggle')
         </div>
         <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 text-center mb-6">Login</h2>
@@ -74,23 +71,8 @@
                 <a href="" class="text-blue-500 dark:text-blue-300 hover:underline">Cadastre-se</a>
             </div>
         </div>
-        <script>
-            document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-                document.documentElement.classList.toggle('dark');
-                const icon = this.querySelector('i');
-                icon.classList.toggle('fa-sun');
-                icon.classList.toggle('fa-moon');
-            });
 
-            document.getElementById('toggle-password').addEventListener('click', function() {
-                const passwordField = document.getElementById('password');
-                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordField.setAttribute('type', type);
-
-                const icon = this.querySelector('i');
-                icon.classList.toggle('fa-eye');
-                icon.classList.toggle('fa-eye-slash');
-            });
-        </script>
     </body>
 </html>
+
+@vite('resources/js/pages/login.js')
