@@ -1,4 +1,4 @@
-import { toastError, toastSuccess, getCurrentTheme } from "../utils";
+import { toastError, toastSuccess, api } from "../utils";
 
 document.getElementById('toggle-password').addEventListener('click', function() {
     const passwordField = document.getElementById('password');
@@ -18,24 +18,16 @@ document.getElementById('login-form').addEventListener('submit', async function(
     const data = Object.fromEntries(formData.entries());
 
     try {
-        const response = await fetch(form.action, {
-            method: form.method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
+        const result = await api(form.action, form.method, data);
 
         if (result.token) {
             localStorage.setItem('token', result.token);
             toastSuccess('Login successful');
         } else {
+            console.log(result);
             toastError(result.message);
         }
     } catch (error) {
-        console.error(error);
-        toastError('An error occurred. Please try again later.');
+        toastError(error.message);
     }
 });
