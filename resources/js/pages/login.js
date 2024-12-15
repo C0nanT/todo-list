@@ -27,7 +27,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
     try {
         const result = await api(form.action, form.method, data);
 
-        if (result === 'success' && result.token) {
+        if (result.status === 'success' && result.token) {
             localStorage.setItem('token', result.token);
             toastSuccess('Login successful');
             window.location = '/home';
