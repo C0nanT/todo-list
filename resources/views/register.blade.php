@@ -18,6 +18,7 @@
                         type="text" 
                         id="name" 
                         name="name" 
+                        minlength="3"
                         required
                         class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 text-gray-700"
                     >

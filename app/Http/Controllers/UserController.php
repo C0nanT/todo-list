@@ -16,11 +16,18 @@ class UserController extends Controller
     public function register(Request $request): JsonResponse
     {
         try {
+
             $request->validate([
                 'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
+                'email' => 'required|string|email|max:255',
                 'password' => 'required|string|min:3',
             ]);
+
+            if (User::where('email', $request->email)->exists()) {
+                return response()->json([
+                    'message' => 'Email already exists'
+                ], 409);
+            }
 
             User::create([
                 'name' => $request->name,
@@ -33,11 +40,14 @@ class UserController extends Controller
                 'message' => 'User registered successfully'
             ], 201);
         } catch (ValidationException $e) {
-            Log::error('Erro de validação', $e->errors());
-            return response()->json(['errors' => $e->errors()], 422);
+            Log::error('Validation error', $e->errors());
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $e->errors()
+            ], 422);
         } catch (\Exception $e) {
-            Log::error('Erro ao registrar usuário', ['exception' => $e]);
-            return response()->json(['message' => 'Erro ao registrar usuário'], 500);
+            Log::error('Error registering user', ['exception' => $e]);
+            return response()->json(['message' => 'Error registering user'], 500);
         }
     }
 
@@ -61,11 +71,14 @@ class UserController extends Controller
                 'token' => $token
             ], 200);
         } catch (ValidationException $e) {
-            Log::error('Erro de validação', $e->errors());
-            return response()->json(['errors' => $e->errors()], 422);
+            Log::error('Validation error', $e->errors());
+            return response()->json([
+                'errors' => $e->errors(),
+                'message' => 'Validation error'
+            ], 422);
         } catch (\Exception $e) {
-            Log::error('Erro ao logar usuário', ['exception' => $e]);
-            return response()->json(['message' => 'Erro ao logar usuário'], 500);
+            Log::error('Error logging in user', ['exception' => $e]);
+            return response()->json(['message' => 'Error logging in user'], 500);
         }
     }
 
@@ -78,8 +91,8 @@ class UserController extends Controller
                 'message' => 'Logged out'
             ], 200);
         } catch (\Exception $e) {
-            Log::error('Erro ao deslogar usuário', ['exception' => $e]);
-            return response()->json(['message' => 'Erro ao deslogar usuário'], 500);
+            Log::error('Error logging out user', ['exception' => $e]);
+            return response()->json(['message' => 'Error logging out user'], 500);
         }
     }
 
