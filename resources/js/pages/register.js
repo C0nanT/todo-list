@@ -17,7 +17,7 @@ document.getElementById('toggle-password').addEventListener('click', function() 
     icon.classList.toggle('fa-eye-slash');
 });
 
-document.getElementById('login-form').addEventListener('submit', async function(event) {
+document.getElementById('register-form').addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const form = event.target;
@@ -26,12 +26,10 @@ document.getElementById('login-form').addEventListener('submit', async function(
 
     try {
         const result = await api(form.action, form.method, data);
-
-        if (result === 'success' && result.token) {
-            localStorage.setItem('token', result.token);
-            toastSuccess('Login successful');
-            window.location = '/home';
-        } else {
+        
+        if (result.status === 'success') {
+            toastSuccess('Register successful');
+        }else{
             toastError(result.message);
         }
     } catch (error) {

@@ -28,7 +28,10 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return response()->json(['message' => 'User registered successfully'], 201);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User registered successfully'
+            ], 201);
         } catch (ValidationException $e) {
             Log::error('Erro de validação', $e->errors());
             return response()->json(['errors' => $e->errors()], 422);
@@ -53,7 +56,10 @@ class UserController extends Controller
             $user = User::where('email', $request->email)->firstOrFail();
             $token = $user->createToken($user->email)->plainTextToken;
 
-            return response()->json(['token' => $token], 200);
+            return response()->json([
+                'status' => 'success',
+                'token' => $token
+            ], 200);
         } catch (ValidationException $e) {
             Log::error('Erro de validação', $e->errors());
             return response()->json(['errors' => $e->errors()], 422);
@@ -67,7 +73,10 @@ class UserController extends Controller
     {
         try {
             $request->user()->tokens()->delete();
-            return response()->json(['message' => 'Logged out'], 200);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Logged out'
+            ], 200);
         } catch (\Exception $e) {
             Log::error('Erro ao deslogar usuário', ['exception' => $e]);
             return response()->json(['message' => 'Erro ao deslogar usuário'], 500);
