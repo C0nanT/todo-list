@@ -14,4 +14,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/todos/{id}', [TodoController::class, 'show']);
     Route::put('/todos/{id}', [TodoController::class, 'update']);
     Route::delete('/todos/{id}', [TodoController::class, 'destroy']);
+
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+    Route::post('/user', [UserController::class, 'store'])->name('api/user.store');
 });
