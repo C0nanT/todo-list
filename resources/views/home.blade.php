@@ -51,16 +51,17 @@
     ]
     @endphp
 
+<div id="todoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    @include('components.create-todo')
+</div>
+
 <body class="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white flex items-center justify-center antialiased p-4">
     <div class="mt-8 mx-auto w-full max-w-7xl">
+
         <div class="flex items-center justify-end mb-2">
             <button id="addTodoButton" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 dark:bg-green-600 rounded-md hover:bg-green-800 dark:hover:bg-green-800">
             <i class="fa-solid fa-plus mr-2"></i> Create
             </button>
-        </div>
-
-        <div id="todoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-                @include('components.create-todo')
         </div>
 
         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800 rounded-lg shadow">

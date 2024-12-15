@@ -27,8 +27,12 @@ document.getElementById('register-form').addEventListener('submit', async functi
     try {
         const result = await api(form.action, form.method, data);
         
-        if (result.status === 'success') {
+        if (result.status === 'success' && result.token) {
             toastSuccess('Register successful');
+            localStorage.setItem('token', result.token);
+            setTimeout(() => {
+                window.location = '/home';
+            }, 1000);
         }else{
             toastError(result.message);
         }

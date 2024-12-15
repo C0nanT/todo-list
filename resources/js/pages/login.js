@@ -30,7 +30,9 @@ document.getElementById('login-form').addEventListener('submit', async function(
         if (result.status === 'success' && result.token) {
             localStorage.setItem('token', result.token);
             toastSuccess('Login successful');
-            window.location = '/home';
+            setTimeout(() => {
+                window.location = '/home';
+            }, 1000);
         } else {
             toastError(result.message);
         }

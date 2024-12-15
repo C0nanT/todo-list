@@ -35,8 +35,13 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
+            // cria o token de login para já logar
+            $user = User::where('email', $request->email)->firstOrFail();
+            $token = $user->createToken($user->email)->plainTextToken;
+
             return response()->json([
                 'status' => 'success',
+                'token' => $token,
                 'message' => 'User registered successfully'
             ], 201);
         } catch (ValidationException $e) {

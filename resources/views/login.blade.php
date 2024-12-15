@@ -1,5 +1,8 @@
-@include('components.theme-toggle')
-
+<div class="absolute top-0 right-0 py-4">
+    <div class="flex items-center space-x-4">
+        @include('components.theme-toggle')
+    </div>
+</div>
 <!DOCTYPE html>
 <html lang="en">
 

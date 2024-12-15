@@ -1,7 +1,7 @@
-<div class="absolute top-4 right-16">
+<div class="mx-4">
     <button id="logout-btn">
-        <span>Logout</span>
         <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
     </button>
 </div>
 
