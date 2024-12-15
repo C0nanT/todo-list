@@ -1,4 +1,8 @@
-import { toastError, toastSuccess, api } from "../utils";
+import { toastError, toastSuccess, api, getCurrentTheme } from "../utils";
+
+const theme = getCurrentTheme();
+document.documentElement.classList.add(theme);
+console.log('Classes on documentElement:', document.documentElement.classList);
 
 if (localStorage.getItem('token')) {
     window.location = '/home';
