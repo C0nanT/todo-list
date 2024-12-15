@@ -1,5 +1,9 @@
 import { toastError, toastSuccess, api } from "../utils";
 
+if (localStorage.getItem('token')) {
+    window.location = '/home';
+}
+
 document.getElementById('toggle-password').addEventListener('click', function() {
     const passwordField = document.getElementById('password');
     const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
