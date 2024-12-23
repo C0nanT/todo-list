@@ -53,7 +53,7 @@ http://localhost:8000
 ## Funcionalidades
 
 ### Gerenciamento de Tarefas:
-- [ ] Registro e autenticação de usuários;
+- [x] Registro e autenticação de usuários;
 - [ ] O usuário pode criar, editar, excluir e marcar como concluída uma tarefa;
 - [ ] O usuário só pode ver as tarefas atribuídas a ele.
 
