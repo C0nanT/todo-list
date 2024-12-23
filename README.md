@@ -1,3 +1,8 @@
+## Índice
+
+- [Como iniciar o projeto](#como-iniciar-o-projeto)
+- [Funcionalidades](#funcionalidades)
+
 ## Como iniciar o projeto
 
 Siga os passos abaixo para iniciar o projeto:
@@ -41,4 +46,29 @@ Siga os passos abaixo para iniciar o projeto:
     php artisan serve
     ```
 
-Agora você pode acessar o projeto em `http://localhost:8000`.
+Agora você pode acessar o projeto em 
+```sh
+http://localhost:8000
+```
+## Funcionalidades
+
+### Gerenciamento de Tarefas:
+- [ ] Registro e autenticação de usuários;
+- [ ] O usuário pode criar, editar, excluir e marcar como concluída uma tarefa;
+- [ ] O usuário só pode ver as tarefas atribuídas a ele.
+
+### Filtros:
+- [ ] Filtro por categorias;
+- [ ] Filtro para exibir somente tarefas concluídas.
+
+### CRUD Completo:
+- [ ] Criação de usuários;
+- [ ] CRUD para tarefas;
+- [ ] CRUD para categorias.
+
+#### Testes:
+- [ ] Testes em todas as rotas backend.
+
+#### Deletar Tarefas Automaticamente:
+- [ ] Após uma semana marcada como concluída, a tarefa deve ser excluída automaticamente do banco de dados.
+- [ ] Job ou Command no Laravel para excluir automaticamente as tarefas concluídas após uma semana (da tarefa finalizada).
