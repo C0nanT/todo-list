@@ -1,10 +1,10 @@
+import $ from '../jquery-setup';
 
-document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-    document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    const icon = this.querySelector('i');
-    icon.classList.toggle('fa-sun');
-    icon.classList.toggle('fa-moon');
+$('#dark-mode-toggle').on('click', function() {
+    $('html').toggleClass('dark');
+    localStorage.setItem('theme', $('html').hasClass('dark') ? 'dark' : 'light');
+    const icon = $(this).find('i');
+    icon.toggleClass('fa-sun fa-moon');
     console.log('Tema atual:', localStorage.getItem('theme'));
 });
 

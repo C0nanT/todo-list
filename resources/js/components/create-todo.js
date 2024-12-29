@@ -1,15 +1,15 @@
 import { toastError, toastSuccess, api, handleErrors } from "../utils";
 
-document.getElementById('addTodoButton').addEventListener('click', function() {
-    document.getElementById('todoModal').classList.remove('hidden');
+$('#addTodoButton').on('click', function() {
+    $('#todoModal').removeClass('hidden');
 });
 
-document.getElementById('closeModalButton').addEventListener('click', function(event) {
+$('#closeModalButton').on('click', function(event) {
     event.preventDefault();
-    document.getElementById('todoModal').classList.add('hidden');
+    $('#todoModal').addClass('hidden');
 });
 
-document.getElementById('createTodoForm').addEventListener('submit', async function(event) {
+$('#createTodoForm').on('submit', async function(event) {
     event.preventDefault();
 
     const form = event.target;
@@ -21,13 +21,10 @@ document.getElementById('createTodoForm').addEventListener('submit', async funct
 
         if (result.status === 'success') {
             toastSuccess('Todo created successfully');
-            document.getElementById('todoModal').classList.add('hidden');
+            $('#todoModal').addClass('hidden');
             form.reset();
 
-            // Adicionar novo todo à tabela
-            const todoTable = document.getElementById('todoTable').getElementsByTagName('tbody')[0];
-            const newRow = todoTable.insertRow();
-            newRow.innerHTML = `
+            const newRow = `
                 <tr>
                     <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white truncate">${result.title}</td>
                     <td class="px-6 py-4 text-sm text-green-700 dark:text-green-400 truncate">${result.category}</td>
@@ -38,6 +35,7 @@ document.getElementById('createTodoForm').addEventListener('submit', async funct
                     </td>
                 </tr>
             `;
+            $('#todoTable tbody').append(newRow);
         } else {
             handleErrors(result.errors);
         }

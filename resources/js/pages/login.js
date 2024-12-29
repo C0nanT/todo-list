@@ -1,23 +1,22 @@
 import { toastError, toastSuccess, api, getCurrentTheme } from "../utils";
 
 const theme = getCurrentTheme();
-document.documentElement.classList.add(theme);
+$('html').addClass(theme);
 
 if (localStorage.getItem('token')) {
     window.location = '/home';
 }
 
-document.getElementById('toggle-password').addEventListener('click', function() {
-    const passwordField = document.getElementById('password');
-    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordField.setAttribute('type', type);
+$('#toggle-password').on('click', function() {
+    const passwordField = $('#password');
+    const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+    passwordField.attr('type', type);
 
-    const icon = this.querySelector('i');
-    icon.classList.toggle('fa-eye');
-    icon.classList.toggle('fa-eye-slash');
+    const icon = $(this).find('i');
+    icon.toggleClass('fa-eye fa-eye-slash');
 });
 
-document.getElementById('login-form').addEventListener('submit', async function(event) {
+$('#login-form').on('submit', async function(event) {
     event.preventDefault();
 
     const form = event.target;
