@@ -55,9 +55,8 @@
     @include('components.create-todo')
 </div>
 
-<body class="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white flex items-center justify-center antialiased p-4">
-    <div class="mt-8 mx-auto w-full max-w-7xl">
-
+<body class="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white flex items-center justify-center antialiased p-4 flex-col">
+    <div class="mt-20 mx-auto w-full max-w-7xl">
         <div class="flex items-center justify-end mb-2">
             <button id="addTodoButton" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 dark:bg-green-600 rounded-md hover:bg-green-800 dark:hover:bg-green-800">
             <i class="fa-solid fa-plus mr-2"></i> Create Todo
@@ -88,6 +87,7 @@
             </tbody>
         </table>
     </div>
+    @include('components.footer')
 </body>
 
 </html>
