@@ -11,12 +11,14 @@ class CreateTodosTable extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->text('description');
+            $table->string('category');
             $table->boolean('completed')->default(false);
             $table->unsignedBigInteger('responsible_id');
             $table->foreign('responsible_id')->references('id')->on('users');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
+            $table->timestamp('completed_at')->nullable();
             $table->timestamps();
         });
     }
