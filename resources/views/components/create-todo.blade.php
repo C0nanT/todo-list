@@ -1,7 +1,7 @@
 <div class="flex flex-col space-y-4 w-full max-w-md mx-auto p-8 shadow-lg rounded-lg bg-white dark:bg-gray-800">
 
     <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Create Todo</h2>
-    <form action="{{ route('api/todos.store') }}" method="POST" class="flex flex-col space-y-4 text-gray-800 dark:text-gray-200">
+    <form id="createTodoForm" action="{{ route('api/todos.store') }}" method="POST" class="flex flex-col space-y-4 text-gray-800 dark:text-gray-200">
         @csrf
         <div class="flex flex-col space-y-2">
             <label for="title" class="text-sm font-medium">Title</label>
