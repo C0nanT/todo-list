@@ -5,47 +5,45 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller
 {
-    public function index(): JsonResponse
-    {
-        $todos = Todo::all();
-        return response()->json($todos);
-    }
 
     public function store(Request $request): JsonResponse
     {
-        $todo = Todo::create($request->all());
-        return response()->json($todo, 201);
-    }
-
-    public function show($id): JsonResponse
-    {
-        $todo = Todo::find($id);
-        if (is_null($todo)) {
-            return response()->json(['message' => 'Todo not found'], 404);
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'string',
+            'category' => 'string',
+            'responsible_id' => 'required|integer|exists:users,id'
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors()
+            ], 422);
         }
-        return response()->json($todo);
-    }
-
-    public function update(Request $request, $id): JsonResponse
-    {
-        $todo = Todo::find($id);
-        if (is_null($todo)) {
-            return response()->json(['message' => 'Todo not found'], 404);
+    
+        try {
+            $author = auth()->user();
+            $data = $request->all();
+            $data['author_id'] = $author->id;
+    
+            $todo = Todo::create($data);
+            Log::info('Todo criado com sucesso: ' . $todo->id);
+    
+            return response()->json($todo, 201);
+        } catch (\Exception $e) {
+            Log::error('Erro ao criar todo: ' . $e->getMessage());
+    
+            return response()->json([
+                'message' => 'Falha ao criar a tarefa.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-        $todo->update($request->all());
-        return response()->json($todo);
     }
-
-    public function destroy($id): JsonResponse
-    {
-        $todo = Todo::find($id);
-        if (is_null($todo)) {
-            return response()->json(['message' => 'Todo not found'], 404);
-        }
-        $todo->delete();
-        return response()->json(null, 204);
-    }
+    
 }

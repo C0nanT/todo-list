@@ -19,7 +19,18 @@ document.getElementById('createTodoForm').addEventListener('submit', async funct
     try {
         const result = await api(form.action, form.method, data);
 
-        console.log(result)
+        if (result.status === 201) {
+            toastSuccess(result.data.message);
+            document.getElementById('todoModal').classList.add('hidden');
+            form.reset();
+        } else {
+            const errors = result.errors;
+            for (const field in errors) {
+                if (errors.hasOwnProperty(field)) {
+                    toastError(errors[field][0]);
+                }
+            }
+        }
         
     } catch (error) {
         toastError(error.message);

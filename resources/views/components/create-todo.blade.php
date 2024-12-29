@@ -14,14 +14,14 @@
         <div class="flex flex-col space-y-2">
             <label for="category" class="text-sm font-medium">Category</label>
             <select name="category" id="category" class="p-2 border border-gray-300 rounded-md text-gray-800" required>
-                <option value="1">Backend</option>
-                <option value="2">Frontend</option>
-                <option value="3">Fullstak</option>
+                <option value="backend">Backend</option>
+                <option value="frontend">Frontend</option>
+                <option value="fullstack">Fullstak</option>
             </select>
         </div>
         <div class="flex flex-col space-y-2">
-            <label for="responsible" class="text-sm font-medium">Responsible</label>
-            <select name="responsible" id="responsible" class="p-2 border border-gray-300 rounded-md text-gray-800" required>
+            <label for="responsible_id" class="text-sm font-medium">Responsible</label>
+            <select name="responsible_id" id="responsible_id" class="p-2 border border-gray-300 rounded-md text-gray-800" required>
                 <option value="1">User 1</option>
                 <option value="2">User 2</option>
                 <option value="3">User 3</option>

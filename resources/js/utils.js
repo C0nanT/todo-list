@@ -68,11 +68,18 @@ export function confirmDialog(title, text, confirmButtonText, cancelButtonText, 
 
 export async function api(url, method, data) {
     try {
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        const token = localStorage.getItem('token');
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
         const response = await fetch(url, {
             method: method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(data)
         });
 

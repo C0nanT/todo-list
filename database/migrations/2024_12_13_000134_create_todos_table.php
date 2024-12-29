@@ -13,6 +13,10 @@ class CreateTodosTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('completed')->default(false);
+            $table->unsignedBigInteger('responsible_id');
+            $table->foreign('responsible_id')->references('id')->on('users');
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
