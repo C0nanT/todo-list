@@ -9,7 +9,7 @@ Route::post('/login', [UserController::class, 'login'])->name('api/login');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/todos', [TodoController::class, 'index']);
+    Route::get('/todos', [TodoController::class, 'index'])->name('api/todos.index');
     Route::post('/todos', [TodoController::class, 'store'])->name('api/todos.store');
     Route::get('/todos/{id}', [TodoController::class, 'show']);
     Route::put('/todos/{id}', [TodoController::class, 'update']);

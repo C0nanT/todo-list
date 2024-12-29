@@ -5,52 +5,6 @@
 
     @include('components.head', ['title' => 'Home'])
 
-    @php $todos = [
-        [
-            'title' => 'Lorem ipsum dolor sit amet',
-            'description' => 'Consectetur adipiscing elit. Integer nec odio. Praesent libero.',
-            'category' => 'work',
-            'image' => 'https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg',
-            'responsible' => 'John Doe',
-        ],
-        [
-            'title' => 'Lorem ipsum dolor sit amet',
-            'description' => 'Consectetur adipiscing elit. Integer nec odio. Praesent libero.',
-            'category' => 'personal',
-            'image' => 'https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg',
-            'responsible' => 'John Doe',
-        ],
-        [
-            'title' => 'Lorem ipsum dolor sit amet',
-            'description' => 'Consectetur adipiscing elit. Integer nec odio. Praesent libero.',
-            'category' => 'work',
-            'image' => 'https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg',
-            'responsible' => 'John Doe',
-        ],
-        [
-            'title' => 'Lorem ipsum dolor sit amet',
-            'description' => 'Consectetur adipiscing elit. Integer nec odio. Praesent libero.',
-            'category' => 'personal',
-            'image' => 'https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg',
-            'responsible' => 'John Doe',
-        ],
-        [
-            'title' => 'Lorem ipsum dolor sit amet',
-            'description' => 'Consectetur adipiscing elit. Integer nec odio. Praesent libero.',
-            'category' => 'work',
-            'image' => 'https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg',
-            'responsible' => 'John Doe',
-        ],
-        [
-            'title' => 'Lorem ipsum dolor sit amet',
-            'description' => 'Consectetur adipiscing elit. Integer nec odio. Praesent libero.',
-            'category' => 'personal',
-            'image' => 'https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg',
-            'responsible' => 'John Doe',
-        ],
-    ]
-    @endphp
-
 <div id="todoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     @include('components.create-todo')
 </div>
@@ -73,14 +27,14 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                @foreach ($todos as $todo)
+                @foreach ($todos->todos as $todo)
                     <tr>
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white truncate">{{ $todo['title'] }}</td>
-                        <td class="px-6 py-4 text-sm text-green-700 dark:text-green-400 truncate">{{ $todo['category'] }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300 truncate">{{ $todo['description'] }}</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white truncate">{{ $todo->title }}</td>
+                        <td class="px-6 py-4 text-sm text-green-700 dark:text-green-400 truncate">{{ $todo->category }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300 truncate">{{ $todo->description }}</td>
                         <td class="px-6 py-4 flex items-center space-x-2">
-                            <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="{{ $todo['image'] }}" alt="{{ $todo['responsible'] }}">
-                            <span class="text-sm text-gray-700 dark:text-gray-300">{{ $todo['responsible'] }}</span>
+                            <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg" alt="{{ $todo->responsible_id }}">
+                            <span class="text-sm text-gray-700 dark:text-gray-300">{{ $todo->responsible_id }}</span>
                         </td>
                     </tr>
                 @endforeach
