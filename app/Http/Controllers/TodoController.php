@@ -33,8 +33,9 @@ class TodoController extends Controller
             $data['author_id'] = $author->id;
     
             $todo = Todo::create($data);
+            $todo['status'] = 'success';
+            
             Log::info('Todo criado com sucesso: ' . $todo->id);
-    
             return response()->json($todo, 201);
         } catch (\Exception $e) {
             Log::error('Erro ao criar todo: ' . $e->getMessage());
