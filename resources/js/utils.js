@@ -97,3 +97,12 @@ export async function checkLogin() {
         window.location = '/';
     }
 }
+
+export async function handleErrors(api_errors) {
+    const errors = api_errors;
+    for (const field in errors) {
+        if (errors.hasOwnProperty(field)) {
+            toastError(errors[field][0]);
+        }
+    }
+}

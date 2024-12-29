@@ -1,4 +1,4 @@
-import { toastError, toastSuccess, api } from "../utils";
+import { toastError, toastSuccess, api, handleErrors } from "../utils";
 
 document.getElementById('addTodoButton').addEventListener('click', function() {
     document.getElementById('todoModal').classList.remove('hidden');
@@ -19,17 +19,12 @@ document.getElementById('createTodoForm').addEventListener('submit', async funct
     try {
         const result = await api(form.action, form.method, data);
 
-        if (result.status === 201) {
-            toastSuccess(result.data.message);
+        if (result.status === 'success') {
+            toastSuccess('Todo created successfully');
             document.getElementById('todoModal').classList.add('hidden');
             form.reset();
         } else {
-            const errors = result.errors;
-            for (const field in errors) {
-                if (errors.hasOwnProperty(field)) {
-                    toastError(errors[field][0]);
-                }
-            }
+            handleErrors(result.errors);
         }
         
     } catch (error) {
