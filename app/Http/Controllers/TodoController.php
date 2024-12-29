@@ -21,6 +21,7 @@ class TodoController extends Controller
                 'status' => 'success',
                 'todos'=> $todos
             ], 200);
+            
         } catch (\Exception $e) {
             Log::error('Error fetching todos: ' . $e->getMessage());
 

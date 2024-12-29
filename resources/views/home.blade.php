@@ -6,7 +6,7 @@
     @include('components.head', ['title' => 'Home'])
 
 <div id="todoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    @include('components.create-todo')
+    @include('components.create-todo', ['todos' => $todos])
 </div>
 
 <body class="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white flex items-center justify-center antialiased p-4 flex-col">

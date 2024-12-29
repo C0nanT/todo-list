@@ -56,6 +56,8 @@
                     </div>
                 </div>
 
+                <input type="hidden" name="permission" value="admin">
+
                 <div class="flex items center">
                     <input type="checkbox" id="terms" name="terms" required>
                     <label for="terms" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">I accept the terms and conditions</label>

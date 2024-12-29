@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-    public function register(Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
         try {
 
@@ -33,9 +33,10 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'image' => $request->image ?? 'https://media.istockphoto.com/id/1778959510/pt/foto/two-cute-dogs-playing-in-backyard.jpg?s=2048x2048&w=is&k=20&c=Hz8ti09dqFclFtarVOWl_C_jb50ia-qmAK0daGxQv-M=',
+                'permission' => $request->permission ?? 'common'
             ]);
 
-            // cria o token de login para já logar
             $user = User::where('email', $request->email)->firstOrFail();
             $token = $user->createToken($user->email)->plainTextToken;
 
@@ -98,6 +99,20 @@ class UserController extends Controller
         } catch (\Exception $e) {
             Log::error('Error logging out user', ['exception' => $e]);
             return response()->json(['message' => 'Error logging out user'], 500);
+        }
+    }
+
+    public function index(): JsonResponse
+    {
+        try {
+            $users = User::all();
+            return response()->json([
+                'status' => 'success',
+                'users' => $users
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Error fetching users', ['exception' => $e]);
+            return response()->json(['message' => 'Error fetching users'], 500);
         }
     }
 

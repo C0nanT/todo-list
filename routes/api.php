@@ -4,7 +4,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
 
-Route::post('/register', [UserController::class, 'register'])->name('api/register');
+Route::post('/register', [UserController::class, 'store'])->name('api/register');
 Route::post('/login', [UserController::class, 'login'])->name('api/login');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
